@@ -1,0 +1,55 @@
+body {
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* main content layout padding/margin */
+main.content {
+  padding: 0;
+  margin: 0;
+}
+
+/* box */
+.content-box-home {
+  max-width: 900px;         
+  margin: 2rem auto;        
+  padding: 2rem 2.5rem;
+  background-color: rgba(255, 255, 255, 0.85); 
+  border-radius: 0.15rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+}
+
+/* text style */
+.content-box-home h2,
+.content-box-home h1,
+.content-box-home p {
+  color: #444;
+  line-height: 1.6;
+  font-style: thin;
+}
+
+main a {
+  color: #379;
+  text-decoration: underline; 
+}
+
+
+main a:hover {
+  color: #379; 
+  text-decoration: underline; 
+}
+
+main a:visited {
+  color: #377;
+}
+
+main a:active {
+  color: #377; 
+}
+

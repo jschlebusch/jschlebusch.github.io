@@ -1,0 +1,211 @@
+---
+title: "Ethnic Diversity in Xinjiang Dataset"
+filters:
+  - shinylive
+page-layout: full
+---
+
+Since the 1950s, the People's Republic of China sponsored migration of Han people into the Xinjiang Uyghur Autonomous Region (Xinjiang), notably employing the Xinjiang Construction and Production Corps as vehicle. After initial waves of Han inflow ebbed down, the 1990s and 2000s, again, witnessed demographic engineering campaigns in the course of which the government sought to incentivise Han immigration into Xinjiang.[^1] This continues today.[^2]
+
+[^1]: McNamee, L., & Zhang, A. (2019). Demographic engineering and international conflict: Evidence from China and the Former USSR. International Organization, 73(2), 291-327; McNamee, L. (2023). Settling for less: Why states colonize and why they stop. Princeton University Press; Yang, Y., de Sherbinin, A., & Liu, Y. (2020). China's poverty alleviation resettlement: Progress, problems and solutions. Habitat International, 98, 102135.
+
+[^2]: RFA. (2020). Subsidies For Han Settlers 'Engineering Demographics' in Uyghur-Majority Southern Xinjiang. https://www.rfa.org/english/news/uyghur/settlers-04132020172143.html.
+
+Demographic engineering and internal colonialisation are generally considered to have affected the demographic balance in the region. Whereas Uyghurs constituted a majority across the region in the past, they are now a mere plurality in some of their traditional settlement areas; in many places the number of Han even exceeds the number of Uyghurs. Yet, there is notable sub-regional variance in the degree of diversity and the change therein.
+
+The *Ethnic Diversity in Xinjiang Dataset* seeks to map changes in ethnic heterogeneity at the county level based on official government statistics, providing the degree of ethnic fractionalisation[^3] and ethnic polarisation[^4] for each county-year. To access the data set, please refer to the [Data](data.qmd) section of this website. Additional visualizations are already available [here](https://github.com/jschlebusch/EDXJ_data/tree/main).
+
+[^3]: Taylor, C., & Hudson, M. World Handbook of Political and Social Indicators.--1972; cf. also Fearon, J. D. (2003). Ethnic and cultural diversity by country. Journal of economic growth, 8, 195-222; Drazanova, L. (2019). Historical index of ethnic fractionalisation dataset.
+
+[^4]: Reynal-Querol, M. (2002). Ethnicity, political systems, and civil wars. Journal of conflict resolution, 46(1), 29-54; Montalvo, J. G., & Reynal-Querol, M. (2005). Ethnic polarization, potential conflict, and civil wars. American economic review, 95(3), 796-816.
+
+The dataset uniquely allows to test - and challenge - assumptions regarding the link between ethnic diversity and development[^5] and ethnic diversity and conflict[^6] at the sub-national level, and to further explore the extent to which ethnic demographics are not, as often assumed, exogenous to inter-group conflict but shaped thereby.[^7] An initial review of the figures below against the background of the history of ethnic violence in Xinjiang already indicates that neither the most fractionalised nor the most polarised counties can clearly be associated with the occurrence of violent events. Crucially, the data also facilitates the systematic analysis of the effects of demographic engineering, thus far rarely addressed. As such, I hope that the data set contributes to generating new insights into how ethnic demographics and inter-group relations are mediated by politics and the effects that interference with the 'demographic facts on the ground' can have.
+
+[^5]: cf. e.g., Alesina, A., Baqir, R., & Easterly, W. (1999). Public goods and ethnic divisions. The Quarterly journal of economics, 114(4), 1243-1284.
+
+[^6]: cf. e.g., Collier, P., & Hoeffler, A. (2004). Greed and grievance in civil war. Oxford economic papers, 56(4), 563-595.
+
+[^7]: cf. also McNamee, L. (2023). Settling for less: Why states colonize and why they stop. Princeton University Press.
+
+**To learn more about the dataset, avenues it opens for further research, and its relevance beyond the case of Xinjiang, please consult:** [Schlebusch, J. (2024). Introducing the Ethnic Diversity in Xinjiang Dataset](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4980682).
+
+::: columns
+::: {.column width="40%"}
+## Average degree of heterogeneity
+
+::: panel-tabset
+## Fractionalisation
+
+```{r}
+#| echo: false
+#| warning: false
+library(mapchina)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(sf)
+library(ggiraph)
+
+df_china_sf <- china%>%
+  filter(Name_Province=="新疆维吾尔自治区")%>%
+  mutate(Status = as.factor("Status"))%>%
+  rename(Code_Prefecture=Code_Perfecture) %>%
+  mutate(Code_County = as.factor(Code_County))
+
+df_frac_average <- read_xlsx("xj_fractionalization_average.xlsx") %>%
+  mutate(Code_County = as.factor(Code_County))
+
+map_data_fa <- df_china_sf %>%
+  left_join(df_frac_average, by = "Code_County")
+
+p <- ggplot(data = map_data_fa) +
+  geom_sf_interactive(aes(fill = Avg_Fractionalization, tooltip = Avg_Fractionalization), color = NA) +
+  scico::scale_fill_scico(palette = "lajolla", na.value = alpha("grey", 0.5)) +
+  theme_void() +
+  labs(
+    fill = "Avg. Ethnic Fractionalisation, 2000-2018"
+  ) +
+  theme(
+    legend.position = "bottom",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA)
+  )
+
+girafe(ggobj = p)
+
+```
+
+## Polarisation
+
+```{r}
+#| echo: false
+#| warning: false
+library(mapchina)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(sf)
+library(ggiraph)
+
+df_china_sf <- china%>%
+  filter(Name_Province=="新疆维吾尔自治区")%>%
+  mutate(Status = as.factor("Status"))%>%
+  rename(Code_Prefecture=Code_Perfecture)%>%
+  mutate(Code_County = as.factor(Code_County))
+
+df_pol_average <- read_xlsx("xj_polarization_average.xlsx") %>%
+  mutate(Code_County = as.factor(Code_County))
+
+map_data_pa <- df_china_sf %>%
+  left_join(df_pol_average, by = "Code_County")
+
+p2 <- ggplot(data = map_data_pa) +
+  geom_sf_interactive(aes(fill = Avg_Polarization, tooltip = Avg_Polarization), color = NA) +
+  scico::scale_fill_scico(palette = "devon", na.value = alpha("grey", 0.5)) +
+  theme_void() +
+  labs(
+    fill = "Avg. Ethnic Polarisation, 2000-2018"
+  ) +
+  theme(
+    legend.position = "bottom",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA)
+  )
+
+girafe(ggobj = p2)
+
+```
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="40%"}
+## Change in heterogeneity
+
+::: panel-tabset
+## Fractionalisation
+
+```{r}
+#| echo: false
+#| warning: false
+library(mapchina)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(sf)
+library(ggiraph)
+
+df_china_sf <- china%>%
+  filter(Name_Province=="新疆维吾尔自治区")%>%
+  mutate(Status = as.factor("Status"))%>%
+  rename(Code_Prefecture=Code_Perfecture) %>%
+  mutate(Code_County = as.factor(Code_County))
+
+df_change_fa <- read_xlsx("xj_fractionalization_change.xlsx") %>%
+  mutate(Code_County = as.factor(Code_County))
+
+map_data_3 <- df_china_sf %>%
+  left_join(df_change_fa, by = "Code_County")
+
+p3 <- ggplot(data = map_data_3) +
+  geom_sf_interactive(aes(fill = Overall_Change, tooltip = Overall_Change), color = NA) +
+  scico::scale_fill_scico(palette = "cork", na.value = alpha("grey", 0.5)) +
+  theme_void() +
+  labs(
+    fill = "Absolute Change in Fractionalisation"
+  ) +
+  theme(
+    legend.position = "bottom",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA)
+  )
+
+girafe(ggobj = p3)
+
+```
+
+## Polarisation
+
+```{r}
+#| echo: false
+#| warning: false
+library(mapchina)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(sf)
+library(ggiraph)
+
+df_china_sf <- china%>%
+  filter(Name_Province=="新疆维吾尔自治区")%>%
+  mutate(Status = as.factor("Status"))%>%
+  rename(Code_Prefecture=Code_Perfecture)%>%
+  mutate(Code_County = as.factor(Code_County))
+
+df_change_pol <- read_xlsx("xj_polarization_change.xlsx") %>%
+  mutate(Code_County = as.factor(Code_County))
+
+map_data_4 <- df_china_sf %>%
+  left_join(df_change_pol, by = "Code_County")
+
+p4 <- ggplot(data = map_data_4) +
+  geom_sf_interactive(aes(fill = Overall_Change, tooltip = Overall_Change), color = NA) +
+  scico::scale_fill_scico(palette = "cork", na.value = alpha("grey", 0.5)) +
+  theme_void() +
+  labs(
+    fill = "Absolute Change in Polarisation"
+  ) +
+  theme(
+    legend.position = "bottom",
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA)
+  )
+
+girafe(ggobj = p4)
+
+```
+:::
+:::
+:::

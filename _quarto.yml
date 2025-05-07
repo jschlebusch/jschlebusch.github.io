@@ -1,0 +1,64 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  favicon: bild.jpg
+  twitter-card: true
+  open-graph: true
+  cookie-consent: 
+    type: express
+    palette: light
+  title: "Jan Schlebusch"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Home"
+      - href: about.qmd
+        text: "About Me"
+      - text: "Projects"
+        menu:
+          - text: "Dataset: Ethnic Diversity in Xinjiang"
+            href: edxj.qmd
+          - text: "Shiny App: Myanmar Conflict History Explorer"
+            href: https://jschlebusch.shinyapps.io/Myanmar_Conflict_History/
+      - href: data.qmd
+        text: "Data"
+      - href: publications.qmd
+        text: "Publications"
+      
+    right: 
+      - icon: twitter
+        href: https://twitter.com/janschlebusx
+      - icon: linkedin
+        href: https://www.linkedin.com/in/jan-schlebusch-57264b288/
+      - icon: github
+        href: https://github.com/jschlebusch
+    pinned: true  
+    
+  search: true
+
+  page-footer: 
+    left: © 2025 Jan Schlebusch | Built in 
+      [![](https://quarto.org/quarto.png){fig-alt="Quarto" width=65px}](https://quarto.org/).
+    right: 
+      - icon: twitter 
+        href: https://twitter.com/janschlebusx
+      - icon: linkedin
+        href: https://www.linkedin.com/in/jan-schlebusch-57264b288/
+      - icon: github
+        href: https://github.com/jschlebusch
+      - icon: envelope
+        href: mailto:jschlebusch@student.ibei.org
+      - icon: globe2
+        href: https://www.ibei.org/en/diversity-and-politics_86050
+    border: true
+    
+format:
+  html:
+    theme: sandstone
+    css: styles.css
+
+
+
+

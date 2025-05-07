@@ -1,0 +1,22 @@
+---
+title: "  "
+toc: false
+page-layout: full
+format:
+  html:
+    css: styles-home.css
+---
+<div class="content-box-home">
+::: {#hero-heading}
+# Welcome!
+
+I am a student of nationalism, researching states' nation-building policies.
+I am currently working as a Research Assistant for the ERC-funded [ETHNICGOODS](https://ethnicgoods.org/)-project at the [Institut Barcelona d'Estudis Internacionals](https://www.ibei.org/en).
+
+On this website, you can find out more about my [interests](about.qmd), my [work](publications.qmd) and my ongoing projects. Any relevant data and code produced will be available here or on my [GitHub](https://github.com/jschlebusch). Occasional updates are also posted on [twitter](https://twitter.com/janschlebusx) and [LinkedIn](https://www.linkedin.com/in/jan-schlebusch-57264b288/).
+
+Please feel free to explore this website and to get in [touch](mailto:jschlebusch@student.ibei.org).
+:::
+
+
+</div>

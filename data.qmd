@@ -1,0 +1,10 @@
+---
+title: "Data"
+resources: "xinjiang_demographics_2005.xlsx"
+---
+
+A sample of the *Ethnic Diversity in Xinjiang Dataset* can be downloaded here. The full data set will be available shortly. If you would like to access the initial version of the data set, please send me an [email](mailto:jschlebusch@student.ibei.org). Learn more about its methodology and relevance [here](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4980682) and access additional material [here](https://github.com/jschlebusch/EDXJ_data).
+
+When using the data, please cite: Schlebusch, J. (2024). Introducing the Ethnic Diversity in Xinjiang Dataset, *Working Paper*, available at SSRN: <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4980682>.
+
+{{< downloadthis EDXJ_sample.csv dname="EDXJ_sample" label="Ethnic Diversity in Xinjiang Dataset" icon="download" type="success" >}}

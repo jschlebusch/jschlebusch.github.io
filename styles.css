@@ -1,0 +1,45 @@
+/* css styles */
+body {
+  margin-left: 5px; /* Adjust the value to your desired left margin */
+  margin-right: 5px; /* Adjust the value to your desired right margin */
+}
+
+
+.navbar {
+  background-color: #379;
+  
+}
+
+.navbar a {
+  color: #777;
+  
+}
+
+.navbar a:hover {
+  color: #777;
+  background-color: transparent;
+  
+}
+
+.navbar-toggler-icon {
+  background-color: #e8e8e8 
+}
+
+main a {
+  color: #379;
+  text-decoration: underline; 
+}
+
+
+main a:hover {
+  color: #379; 
+  text-decoration: underline; 
+}
+
+main a:visited {
+  color: #377;
+}
+
+main a:active {
+  color: #377; 
+}
