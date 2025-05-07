@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  
+resources:
+  - "googleb49afc210207ed01.html"
 
 website:
   favicon: bild.jpg
