@@ -9,9 +9,6 @@ website:
   favicon: bild.jpg
   twitter-card: true
   open-graph: true
-  cookie-consent: 
-    type: express
-    palette: light
   title: "Jan Schlebusch"
   navbar:
     left:
